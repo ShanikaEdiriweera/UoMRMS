@@ -9,6 +9,6 @@ package com.shanika.uomrmsdesktop.Logic;
  *
  * @author Shanika Ediriweera
  */
-public abstract class User {
+public class Faculty {
     
 }

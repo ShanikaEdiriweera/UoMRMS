@@ -9,6 +9,7 @@ package com.shanika.uomrmsdesktop.Logic;
  *
  * @author Shanika Ediriweera
  */
-public abstract class User {
-    
+public enum Gender {
+    Male,
+    Female
 }

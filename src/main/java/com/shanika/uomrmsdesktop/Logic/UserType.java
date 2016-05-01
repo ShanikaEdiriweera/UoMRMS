@@ -9,6 +9,10 @@ package com.shanika.uomrmsdesktop.Logic;
  *
  * @author Shanika Ediriweera
  */
-public abstract class User {
-    
+public enum UserType {
+    SystemAdmin,
+    UniversityAdmin,
+    AcademicStaff,
+    ExaminationsStaff,
+    Student
 }
