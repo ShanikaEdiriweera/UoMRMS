@@ -9,6 +9,10 @@ package com.shanika.uomrmsdesktop.Logic;
  *
  * @author Shanika Ediriweera
  */
-public class UniversityAdmin {
+public class UniversityAdmin extends User{
+    
+    public UniversityAdmin(String ID, String name, Gender gender, UserType userType, Department department) {
+        super(ID, name, gender, userType, department);
+    }
     
 }

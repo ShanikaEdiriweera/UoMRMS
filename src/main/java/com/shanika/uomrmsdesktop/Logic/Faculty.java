@@ -10,9 +10,14 @@ package com.shanika.uomrmsdesktop.Logic;
  * @author Shanika Ediriweera
  */
 public class Faculty {
-    private int ID;
+    private final int ID;
     private String name;
     
+    /**
+     *
+     * @param ID
+     * @param name
+     */
     public Faculty(int ID, String name){
         this.ID = ID;
         this.name = name;
