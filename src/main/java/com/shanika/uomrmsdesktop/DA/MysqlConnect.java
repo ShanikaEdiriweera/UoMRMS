@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shanika.uomrmsdesktop.DA;
 
 import java.sql.Connection;
@@ -13,9 +8,10 @@ import java.sql.DriverManager;
  * @author Shanika Ediriweera
  */
 public final class MysqlConnect {
-    public Connection conn;
-    private Statement statement;
-    public static MysqlConnect db;
+    
+    private Connection conn;
+    private static MysqlConnect db;
+    
     private MysqlConnect() {
         String url= "jdbc:mysql://localhost:3306/";
         String dbName = "uomrms_db";
@@ -30,39 +26,22 @@ public final class MysqlConnect {
             sqle.printStackTrace();
         }
     }
+    
     /**
      *
      * @return MysqlConnect Database connection object
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.sql.SQLException
      */
-    public static synchronized MysqlConnect getDbCon() {
+    public static synchronized MysqlConnect getMysqlConnect() throws ClassNotFoundException,SQLException{
         if ( db == null ) {
             db = new MysqlConnect();
         }
         return db;
- 
     }
-    /**
-     *
-     * @param query String The query to be executed
-     * @return a ResultSet object containing the results or null if not available
-     * @throws SQLException
-     */
-    public ResultSet query(String query) throws SQLException{
-        statement = db.conn.createStatement();
-        ResultSet res = statement.executeQuery(query);
-        return res;
+    
+    //getting the db connection from the MysqlConnect object
+    public Connection getDBConnection() throws ClassNotFoundException,SQLException{
+        return conn;
     }
-    /**
-     * @desc Method to insert data to a table
-     * @param insertQuery String The Insert query
-     * @return boolean
-     * @throws SQLException
-     */
-    public int insert(String insertQuery) throws SQLException {
-        statement = db.conn.createStatement();
-        int result = statement.executeUpdate(insertQuery);
-        return result;
- 
-    }
- 
 }

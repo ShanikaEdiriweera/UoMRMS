@@ -12,11 +12,13 @@ package com.shanika.uomrmsdesktop.Logic;
 public class Student extends User{
     private double cGPA;
     private int rank;
+    private String batch;
     
-    public Student(String ID, String name, Gender gender, UserType userType, Department department) {
+    public Student(String ID, String name, Gender gender, UserType userType, Department department, String batch) {
         super(ID, name, gender, userType, department);
         cGPA = 0.0;
         rank = 0;
+        this.batch = batch; 
     }
 
     public double getcGPA() {
@@ -33,6 +35,14 @@ public class Student extends User{
 
     public void setRank(int rank) {
         this.rank = rank;
+    }
+
+    public String getBatch() {
+        return batch;
+    }
+
+    public void setBatch(String batch) {
+        this.batch = batch;
     }
     
     
