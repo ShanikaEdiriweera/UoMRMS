@@ -30,10 +30,8 @@ public final class MysqlConnect {
     /**
      *
      * @return MysqlConnect Database connection object
-     * @throws java.lang.ClassNotFoundException
-     * @throws java.sql.SQLException
      */
-    public static synchronized MysqlConnect getMysqlConnect() throws ClassNotFoundException,SQLException{
+    public static synchronized MysqlConnect getMysqlConnect() {
         if ( db == null ) {
             db = new MysqlConnect();
         }

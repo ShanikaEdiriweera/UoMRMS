@@ -8,6 +8,8 @@ package com.shanika.uomrmsdesktop.DA;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,19 +20,32 @@ public class DBHandler {
     private ResultSet resultSet;
     private final MysqlConnect db;
     
-    public DBHandler() throws ClassNotFoundException, SQLException{
+    public DBHandler()  {
         db = MysqlConnect.getMysqlConnect();
     }
     
-    public int setData(String sql) throws SQLException, ClassNotFoundException {
-        statement = db.getDBConnection().createStatement();
-        int result = statement.executeUpdate(sql);
-        return result;
+    public int setData(String sql)  {
+        try {
+            statement = db.getDBConnection().createStatement();
+            int result = statement.executeUpdate(sql);
+            return result;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
     
-    public ResultSet getData(String sql) throws SQLException, ClassNotFoundException{
-        statement = db.getDBConnection().createStatement();
-        resultSet = statement.executeQuery(sql);
+    public ResultSet getData(String sql) {
+        try {
+            statement = db.getDBConnection().createStatement();
+            resultSet = statement.executeQuery(sql);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return resultSet;
     }
 }

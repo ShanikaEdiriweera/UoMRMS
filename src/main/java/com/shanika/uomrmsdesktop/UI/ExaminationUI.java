@@ -5,6 +5,7 @@
  */
 package com.shanika.uomrmsdesktop.UI;
 
+import com.shanika.uomrmsdesktop.DA.DBHandler;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -14,11 +15,15 @@ import javax.swing.JLabel;
  */
 public class ExaminationUI extends javax.swing.JFrame {
 
+    //creating a DBHandler
+    DBHandler dBHandler;
+    
     /**
-     * Creates new form ExamDivUI
+     * Creates new form ExaminationUI
      */
     public ExaminationUI() {
         initComponents();
+        setDataFromDB();
     }
 
     /**
@@ -912,12 +917,22 @@ public class ExaminationUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    //--------------------------------User methods-------------------------------------
+    private void setDataFromDB(){
+        dBHandler = new DBHandler();
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "dcdsc022", "CS-2012", "EN-2012", "CS-3042" }));
+    }
+    
+    
+    //--------------------------------End User methods-------------------------------------
+    
+
     //changed the main method to normal methot in order to call from Application
     /**
      * @param args the command line arguments
      */
     //public static void main(String args[]) {
-    public void displayUI(String args[]) {
+    public void displayUI() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
