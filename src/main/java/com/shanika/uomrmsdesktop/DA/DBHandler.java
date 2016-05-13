@@ -5,9 +5,12 @@
  */
 package com.shanika.uomrmsdesktop.DA;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,5 +50,47 @@ public class DBHandler {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
         return resultSet;
+    }
+    
+    public int setData(PreparedStatement preparedStatement)  {
+        try {
+            int result = preparedStatement.executeUpdate();
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    
+    public ResultSet getData(PreparedStatement preparedStatement) {
+        try {
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultSet;
+    }
+    
+    //method to get modules
+    public String[] getModules(){
+        List modulesArray = new ArrayList();
+ 
+        try {
+            PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("SELECT DISTINCT code FROM module");
+            ResultSet resultSet = getData(preparedStatement);
+            
+            while (resultSet.next()) {
+                modulesArray.add(resultSet.getString(1));
+            }   
+            // convert to a string array
+            return (String[]) modulesArray.toArray(new String[modulesArray.size()]);
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
     }
 }

@@ -9,7 +9,7 @@ import java.sql.DriverManager;
  */
 public final class MysqlConnect {
     
-    private Connection conn;
+    private Connection connection = null;
     private static MysqlConnect db;
     
     private MysqlConnect() {
@@ -20,9 +20,8 @@ public final class MysqlConnect {
         String password = "711246252";
         try {
             Class.forName(driver).newInstance();
-            this.conn = (Connection)DriverManager.getConnection(url+dbName,userName,password);
-        }
-        catch (Exception sqle) {
+            this.connection = (Connection)DriverManager.getConnection(url+dbName,userName,password);
+        }catch (Exception sqle) {
             sqle.printStackTrace();
         }
     }
@@ -40,6 +39,6 @@ public final class MysqlConnect {
     
     //getting the db connection from the MysqlConnect object
     public Connection getDBConnection() throws ClassNotFoundException,SQLException{
-        return conn;
+        return connection;
     }
 }

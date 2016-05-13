@@ -6,6 +6,14 @@
 package com.shanika.uomrmsdesktop.UI;
 
 import com.shanika.uomrmsdesktop.DA.DBHandler;
+import com.shanika.uomrmsdesktop.DA.MysqlConnect;
+import java.sql.Array;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -16,7 +24,9 @@ import javax.swing.JLabel;
 public class ExaminationUI extends javax.swing.JFrame {
 
     //creating a DBHandler
-    DBHandler dBHandler;
+    private DBHandler dBHandler = null;
+    //creating connection
+    private Connection connection = null;
     
     /**
      * Creates new form ExaminationUI
@@ -918,10 +928,17 @@ public class ExaminationUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     //--------------------------------User methods-------------------------------------
+    
+    //method to set data
     private void setDataFromDB(){
+        
         dBHandler = new DBHandler();
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "dcdsc022", "CS-2012", "EN-2012", "CS-3042" }));
+        
+        
+        //jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "dcdsc022", "CS-2012", "EN-2012", "CS-3042" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(dBHandler.getModules()));
     }
+    
     
     
     //--------------------------------End User methods-------------------------------------
