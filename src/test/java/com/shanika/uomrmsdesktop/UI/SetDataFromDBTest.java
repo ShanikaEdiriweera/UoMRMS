@@ -5,9 +5,8 @@
  */
 package com.shanika.uomrmsdesktop.UI;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import com.shanika.uomrmsdesktop.Application;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -16,10 +15,13 @@ import org.junit.Test;
  */
 public class SetDataFromDBTest {
 
-
+    
     @Test
-    public void postPersonData() {
-
+    public void setModulesTest() {
+        Application.main(null);
+        System.out.println();
+        String str ="";
+        Assert.assertEquals("",str);
     }
 
 }   
