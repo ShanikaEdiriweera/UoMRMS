@@ -73,17 +73,109 @@ public class DBHandler {
     
     //method to get modules
     public String[] getModules(){
-        List modulesArray = new ArrayList();
+        List moduleArray = new ArrayList();
  
         try {
             PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("SELECT DISTINCT code FROM module");
             ResultSet resultSet = getData(preparedStatement);
             
             while (resultSet.next()) {
-                modulesArray.add(resultSet.getString(1));
+                moduleArray.add(resultSet.getString(1));
             }   
             // convert to a string array
-            return (String[]) modulesArray.toArray(new String[modulesArray.size()]);
+            return (String[]) moduleArray.toArray(new String[moduleArray.size()]);
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    
+    //method to get Semesters
+    public String[] getSemesters(){
+        List semesterArray = new ArrayList();
+ 
+        try {
+            PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("SELECT name FROM semester");
+            ResultSet resultSet = getData(preparedStatement);
+            
+            while (resultSet.next()) {
+                semesterArray.add(resultSet.getString(1));
+            }   
+            // convert to a string array
+            return (String[]) semesterArray.toArray(new String[semesterArray.size()]);
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    
+    //method to get faculties
+    public String[] getFaculties(){
+        List facultyArray = new ArrayList();
+ 
+        try {
+            PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("SELECT name FROM faculty");
+            ResultSet resultSet = getData(preparedStatement);
+            
+            while (resultSet.next()) {
+                facultyArray.add(resultSet.getString(1));
+            }   
+            // convert to a string array
+            return (String[]) facultyArray.toArray(new String[facultyArray.size()]);
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    
+    //method to get departments
+    public String[] getDepartments(){
+        List departmentArray = new ArrayList();
+ 
+        try {
+            PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("SELECT name FROM department");
+            ResultSet resultSet = getData(preparedStatement);
+            
+            while (resultSet.next()) {
+                departmentArray.add(resultSet.getString(1));
+            }   
+            // convert to a string array
+            return (String[]) departmentArray.toArray(new String[departmentArray.size()]);
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    
+    //method to get batches
+    public String[] getBatches(){
+        List batchArray = new ArrayList();
+ 
+        try {
+            PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("SELECT year FROM batch");
+            ResultSet resultSet = getData(preparedStatement);
+            
+            while (resultSet.next()) {
+                batchArray.add(resultSet.getString(1));
+            }   
+            // convert to a string array
+            return (String[]) batchArray.toArray(new String[batchArray.size()]);
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
