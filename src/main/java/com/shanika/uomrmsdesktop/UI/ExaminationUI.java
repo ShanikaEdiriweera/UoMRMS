@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
 /**
@@ -51,8 +52,6 @@ public class ExaminationUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -103,6 +102,11 @@ public class ExaminationUI extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         jComboBox11 = new javax.swing.JComboBox();
@@ -155,17 +159,11 @@ public class ExaminationUI extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 255));
-        jLabel4.setText("Password");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
+        jLabel4.setText("UserID");
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(102, 102, 255));
-        jButton1.setText("Create Account");
+        jButton1.setText("Logout");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uomlogo.png"))); // NOI18N
@@ -175,32 +173,28 @@ public class ExaminationUI extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(256, 256, 256)
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1008, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
-                                .addGap(291, 291, 291)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel4))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(1072, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addGap(14, 14, 14))
+                                .addGap(279, 279, 279)))
+                        .addGap(89, 89, 89)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addGap(48, 48, 48))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(57, 57, 57))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,18 +202,16 @@ public class ExaminationUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1))
-                        .addGap(18, 18, 18)
                         .addComponent(jButton1)
-                        .addGap(15, 15, 15))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addGap(26, 26, 26))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -401,14 +393,16 @@ public class ExaminationUI extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel16.setText("Semester");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CS-2022", "CS-2012", "EN-2012", "CS-3042" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Module" }));
+        jComboBox3.setToolTipText("Select Module");
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox3ActionPerformed(evt);
             }
         });
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semester 1", "Semester 2", "Semester 3", "Semester 4", "Semester 5", "Semester 6", "Semester 7", "Semester 8" }));
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Semester" }));
+        jComboBox5.setToolTipText("Select Semester");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -420,12 +414,19 @@ public class ExaminationUI extends javax.swing.JFrame {
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel20.setText("Faculty");
 
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Engineering", "IT", "Architecture" }));
+        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Faculty" }));
+        jComboBox8.setToolTipText("Select Faculty");
 
         jLabel41.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel41.setText("Department");
 
-        jComboBox21.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CSE", "ENTC", "DCPE", "CE", "ME", "TM", "EM", "TLM", "EE", "MSE" }));
+        jComboBox21.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Department" }));
+        jComboBox21.setToolTipText("Select Department");
+        jComboBox21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox21ActionPerformed(evt);
+            }
+        });
 
         jButton10.setText("Submit");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -444,17 +445,17 @@ public class ExaminationUI extends javax.swing.JFrame {
                     .addComponent(jLabel14)
                     .addComponent(jLabel20))
                 .addGap(28, 28, 28)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(106, 106, 106)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBox8, 0, 155, Short.MAX_VALUE)
+                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(78, 78, 78)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
                     .addComponent(jLabel41))
                 .addGap(36, 36, 36)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox21, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBox21, 0, 180, Short.MAX_VALUE)
+                    .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(69, 69, 69)
@@ -495,22 +496,26 @@ public class ExaminationUI extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel18.setText("Faculty");
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Engineering", "IT", "Architecture" }));
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Faculty" }));
+        jComboBox6.setToolTipText("Select Faculty");
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel19.setText("Department");
 
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CSE", "ENTC", "DCPE", "CE", "ME", "TM", "EM", "TLM", "EE", "MSE" }));
+        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Department" }));
+        jComboBox7.setToolTipText("Select Department");
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel21.setText("Batch");
 
-        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CSE12", "CSE13", "CSE14", "ENTC12", "ENTC13", "ENTC14" }));
+        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Batch" }));
+        jComboBox9.setToolTipText("Select Batch");
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel22.setText("Semester");
 
-        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semester 1", "Semester 2", "Semester 3", "Semester 4", "Semester 5", "Semester 6", "Semester 7", "Semester 8" }));
+        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Semester" }));
+        jComboBox10.setToolTipText("Select Semester");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -566,28 +571,20 @@ public class ExaminationUI extends javax.swing.JFrame {
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel24.setText("Overall GPA");
 
+        jButton11.setText("Generate SGPA");
+
+        jButton12.setText("Generate Semester Ranks");
+
+        jButton13.setText("Generate CGPA");
+
+        jButton14.setText("Generate Overall Ranks");
+
+        jButton15.setText("Publish");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel18))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel21)
-                    .addComponent(jLabel22))
-                .addGap(65, 65, 65)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox9, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(298, 298, 298))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(50, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -596,8 +593,43 @@ public class ExaminationUI extends javax.swing.JFrame {
                 .addGap(53, 53, 53)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel24)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jButton13)
+                        .addGap(68, 68, 68)
+                        .addComponent(jButton14)))
                 .addGap(29, 29, 29))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel18))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jButton11)
+                        .addGap(59, 59, 59)
+                        .addComponent(jButton12)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboBox7, 0, 164, Short.MAX_VALUE)
+                                    .addComponent(jComboBox6, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel21)
+                                    .addComponent(jLabel22))
+                                .addGap(65, 65, 65))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(41, 41, 41)))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBox9, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox10, 0, 129, Short.MAX_VALUE))
+                        .addGap(284, 284, 284))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -621,7 +653,15 @@ public class ExaminationUI extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel22)
                             .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 284, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton11)
+                    .addComponent(jButton12)
+                    .addComponent(jButton13)
+                    .addComponent(jButton14))
+                .addGap(29, 29, 29)
+                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
                     .addComponent(jLabel23))
@@ -637,9 +677,11 @@ public class ExaminationUI extends javax.swing.JFrame {
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel25.setText("Faculty");
 
-        jComboBox11.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Engineering", "IT", "Architecture" }));
+        jComboBox11.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Faculty" }));
+        jComboBox11.setToolTipText("Select Faculty");
 
-        jComboBox12.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CSE", "ENTC", "DCPE", "CE", "ME", "TM", "EM", "TLM", "EE", "MSE" }));
+        jComboBox12.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Department" }));
+        jComboBox12.setToolTipText("Select Department");
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel26.setText("Department");
@@ -647,17 +689,20 @@ public class ExaminationUI extends javax.swing.JFrame {
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel27.setText("Module");
 
-        jComboBox13.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CS-2022", "CS-2012", "EN-2012", "CS-3042" }));
+        jComboBox13.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Module" }));
+        jComboBox13.setToolTipText("Select Module");
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel28.setText("Batch");
 
-        jComboBox14.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CSE12", "CSE13", "CSE14", "ENTC12", "ENTC13", "ENTC14" }));
+        jComboBox14.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Batch" }));
+        jComboBox14.setToolTipText("Select Batch");
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel29.setText("Semester");
 
-        jComboBox15.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semester 1", "Semester 2", "Semester 3", "Semester 4", "Semester 5", "Semester 6", "Semester 7", "Semester 8" }));
+        jComboBox15.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Semester" }));
+        jComboBox15.setToolTipText("Select Semester");
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel30.setText("Semester GPA");
@@ -680,30 +725,29 @@ public class ExaminationUI extends javax.swing.JFrame {
                             .addGap(115, 115, 115)
                             .addComponent(jLabel27))))
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox13, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jComboBox12, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(91, 91, 91)
-                                .addComponent(jLabel29)))
-                        .addContainerGap(440, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel31)
-                        .addGap(330, 330, 330))))
+                        .addGap(330, 330, 330))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jComboBox13, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox12, 0, 154, Short.MAX_VALUE))
+                        .addGap(60, 60, 60)
+                        .addComponent(jLabel29)
+                        .addContainerGap(440, Short.MAX_VALUE))))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(112, 112, 112)
                 .addComponent(jLabel25)
                 .addGap(88, 88, 88)
-                .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(110, 110, 110)
+                .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83)
                 .addComponent(jLabel28)
                 .addGap(68, 68, 68)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox15, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBox15, 0, 127, Short.MAX_VALUE)
+                    .addComponent(jComboBox14, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -911,10 +955,6 @@ public class ExaminationUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
@@ -927,6 +967,10 @@ public class ExaminationUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void jComboBox21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox21ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox21ActionPerformed
+
     //--------------------------------User methods-------------------------------------
     
     //method to set data
@@ -934,12 +978,35 @@ public class ExaminationUI extends javax.swing.JFrame {
         
         dBHandler = new DBHandler();
         
-        
-        //jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "dcdsc022", "CS-2012", "EN-2012", "CS-3042" }));
+        //set data to Add results panel
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(dBHandler.getModules()));
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(dBHandler.getSemesters()));
+        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel(dBHandler.getFaculties()));
+        jComboBox21.setModel(new javax.swing.DefaultComboBoxModel(dBHandler.getDepartments()));
+        
+        //set data to Process results panel
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(dBHandler.getFaculties()));
+        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(dBHandler.getDepartments()));
+        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel(dBHandler.getSemesters()));
+        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel(dBHandler.getBatches()));
+        
+        //set data to Generate graphs panel
+        jComboBox11.setModel(new javax.swing.DefaultComboBoxModel(dBHandler.getFaculties()));
+        jComboBox12.setModel(new javax.swing.DefaultComboBoxModel(dBHandler.getDepartments()));
+        jComboBox13.setModel(new javax.swing.DefaultComboBoxModel(dBHandler.getModules()));
+        jComboBox14.setModel(new javax.swing.DefaultComboBoxModel(dBHandler.getBatches()));
+        jComboBox15.setModel(new javax.swing.DefaultComboBoxModel(dBHandler.getSemesters()));
+        
     }
     
-    
+    public JComboBox getComboBox(int boxNumber){
+        switch(boxNumber){
+            case 3 :
+                return jComboBox3;
+            default:
+                return null;
+        }
+    }
     
     //--------------------------------End User methods-------------------------------------
     
@@ -985,6 +1052,11 @@ public class ExaminationUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1064,8 +1136,6 @@ public class ExaminationUI extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
