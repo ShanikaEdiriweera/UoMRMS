@@ -14,26 +14,21 @@ INSERT INTO `department` (`ID`, `name`, `Faculty_ID`) VALUES
 (8, 'Material Science Engineering', 1);
 
 
-INSERT INTO `grade` (`ID`, `grade`, `mark`) VALUES
-(1, 'A+', '4.2'),
-(2, 'A', '4.0'),
-(3, 'A-', '3.7'),
-(4, 'B+', '3.3'),
-(5, 'B', '3.0'),
-(6, 'B-', '2.7'),
-(7, 'C+', '2.3'),
-(8, 'C', '2.0'),
-(9, 'C-', '1.5'),
-(10, 'D', '1.0'),
-(11, 'F', '0.0'),
-(12, 'I-we', '0.0'),
-(13, 'I-ca', '0.0'),
-(14, 'ab', '0.0');
-
-
-INSERT INTO `module` (`code`, `title`, `credits`, `gpa`) VALUES
-('CS-2022', 'OOP', '3.0', 1),
-('CS-2032', 'OOSD', '3.0', 1);
+INSERT INTO `grade` (`grade`, `mark`) VALUES
+('A+', '4.2'),
+('A', '4.0'),
+('A-', '3.7'),
+('B+', '3.3'),
+('B', '3.0'),
+('B-', '2.7'),
+('C+', '2.3'),
+('C', '2.0'),
+('C-', '1.5'),
+('D', '1.0'),
+('F', '0.0'),
+('I-we', '0.0'),
+('I-ca', '0.0'),
+('ab', '0.0');
 
 
 INSERT INTO `semester` (`ID`, `name`) VALUES
@@ -47,3 +42,7 @@ INSERT INTO `semester` (`ID`, `name`) VALUES
 (8, 'Semester 8');
 
 
+
+INSERT INTO `module` (`code`, `title`, `credits`, `gpa`, `Semester_ID`) VALUES
+('CS-2022', 'OOP', '3.0', 1, 2),
+('CS-2032', 'OOSD', '3.0', 1, 3);

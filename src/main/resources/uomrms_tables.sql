@@ -114,7 +114,13 @@ CREATE TABLE IF NOT EXISTS `uomrms_db`.`Module` (
   `title` VARCHAR(100) NULL,
   `credits` DECIMAL(2,1) NULL,
   `gpa` TINYINT(1) NULL,
-  PRIMARY KEY (`code`))
+  `Semester_ID` INT NOT NULL,
+  PRIMARY KEY (`Semester_ID`, `code`),
+  CONSTRAINT `fk_Module_Semester1`
+    FOREIGN KEY (`Semester_ID`)
+    REFERENCES `uomrms_db`.`Semester` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -122,32 +128,9 @@ ENGINE = InnoDB;
 -- Table `uomrms_db`.`Grade`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `uomrms_db`.`Grade` (
-  `ID` INT NOT NULL,
-  `grade` VARCHAR(10) NULL,
+  `grade` VARCHAR(10) NOT NULL,
   `mark` DECIMAL(2,1) NULL,
-  PRIMARY KEY (`ID`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `uomrms_db`.`Module_taken`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `uomrms_db`.`Module_taken` (
-  `Semester_ID` INT NOT NULL,
-  `Module_code` VARCHAR(10) NOT NULL,
-  PRIMARY KEY (`Semester_ID`, `Module_code`),
-  INDEX `fk_Semester_has_Module_Module1_idx` (`Module_code` ASC),
-  INDEX `fk_Semester_has_Module_Semester1_idx` (`Semester_ID` ASC),
-  CONSTRAINT `fk_Semester_has_Module_Semester1`
-    FOREIGN KEY (`Semester_ID`)
-    REFERENCES `uomrms_db`.`Semester` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Semester_has_Module_Module1`
-    FOREIGN KEY (`Module_code`)
-    REFERENCES `uomrms_db`.`Module` (`code`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`grade`))
 ENGINE = InnoDB;
 
 
@@ -180,25 +163,26 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `uomrms_db`.`Student_has_Module` (
   `Student_ID` VARCHAR(10) NOT NULL,
+  `Grade_grade` VARCHAR(10) NOT NULL,
+  `Module_Semester_ID` INT NOT NULL,
   `Module_code` VARCHAR(10) NOT NULL,
-  `Grade_ID` INT NULL,
-  PRIMARY KEY (`Student_ID`, `Module_code`),
-  INDEX `fk_Student_has_Module_Module1_idx` (`Module_code` ASC),
+  PRIMARY KEY (`Student_ID`, `Module_Semester_ID`, `Module_code`),
   INDEX `fk_Student_has_Module_Student1_idx` (`Student_ID` ASC),
-  INDEX `fk_Student_has_Module_Grade1_idx` (`Grade_ID` ASC),
+  INDEX `fk_Student_has_Module_Grade1_idx` (`Grade_grade` ASC),
+  INDEX `fk_Student_has_Module_Module1_idx` (`Module_Semester_ID` ASC, `Module_code` ASC),
   CONSTRAINT `fk_Student_has_Module_Student1`
     FOREIGN KEY (`Student_ID`)
     REFERENCES `uomrms_db`.`Student` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Student_has_Module_Module1`
-    FOREIGN KEY (`Module_code`)
-    REFERENCES `uomrms_db`.`Module` (`code`)
+  CONSTRAINT `fk_Student_has_Module_Grade1`
+    FOREIGN KEY (`Grade_grade`)
+    REFERENCES `uomrms_db`.`Grade` (`grade`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Student_has_Module_Grade1`
-    FOREIGN KEY (`Grade_ID`)
-    REFERENCES `uomrms_db`.`Grade` (`ID`)
+  CONSTRAINT `fk_Student_has_Module_Module1`
+    FOREIGN KEY (`Module_Semester_ID` , `Module_code`)
+    REFERENCES `uomrms_db`.`Module` (`Semester_ID` , `code`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
