@@ -5,6 +5,7 @@
  */
 package com.shanika.uomrmsdesktop.DA;
 
+import com.shanika.uomrmsdesktop.Logic.ModuleGrade;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -184,5 +185,23 @@ public class DBHandler {
         }
         
         return null;
+    }
+    
+    //add test
+    //method to add results to db
+    public void setModuleGrades(ModuleGrade[] moduleGrades){      
+        try {
+            for (ModuleGrade moduleGrade : moduleGrades){
+                PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("INSERT INTO student_has_module VALUES(?,?,?)");
+                preparedStatement.setString( 1, moduleGrade.getStudent().getID());
+                preparedStatement.setString( 2, moduleGrade.getModule().getmCode());
+                preparedStatement.setString( 3, moduleGrade.getGrade());
+                int result = setData(preparedStatement);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
 }
