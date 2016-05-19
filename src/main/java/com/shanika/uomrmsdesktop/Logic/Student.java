@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shanika.uomrmsdesktop.Logic;
 
 /**
@@ -12,13 +7,34 @@ package com.shanika.uomrmsdesktop.Logic;
 public class Student extends User{
     private double cGPA;
     private int rank;
-    private String batch;
+    //havent created an entity for batch
+    private int batch;
     
-    public Student(String ID, String name, Gender gender, UserType userType, Department department, String batch) {
+    public Student(String ID, String name, Gender gender, UserType userType, Department department, int batch) {
         super(ID, name, gender, userType, department);
         cGPA = 0.0;
         rank = 0;
         this.batch = batch; 
+    }
+    
+    public static function getOne($id)
+    {
+        $con = Connection::getConnectionObject()->getConnection();
+        // Check connection
+        if (mysqli_connect_errno())
+        {
+            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+        }
+
+        $student = new Student();
+        $stmt = $con->prepare('SELECT id,name,index_no,CGPA,rank FROM student WHERE id=?');
+        $stmt->bind_param("s",$id);
+        $stmt->execute();
+
+        $stmt->bind_result($student->id,$student->name,$student->indexNo,$student->cGPA,$student->rank);
+        $stmt->fetch();
+        $stmt->close();
+        return $student;
     }
 
     public double getcGPA() {
@@ -37,11 +53,11 @@ public class Student extends User{
         this.rank = rank;
     }
 
-    public String getBatch() {
+    public int getBatch() {
         return batch;
     }
 
-    public void setBatch(String batch) {
+    public void setBatch(int batch) {
         this.batch = batch;
     }
     

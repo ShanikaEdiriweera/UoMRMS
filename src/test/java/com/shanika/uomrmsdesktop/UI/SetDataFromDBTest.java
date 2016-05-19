@@ -7,6 +7,7 @@ package com.shanika.uomrmsdesktop.UI;
 
 import com.shanika.uomrmsdesktop.Application;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -14,7 +15,7 @@ import org.junit.Test;
  * @author Shanika Ediriweera
  */
 public class SetDataFromDBTest {
-
+    @Before
     
     @Test
     public void setModulesTest() {
@@ -24,5 +25,6 @@ public class SetDataFromDBTest {
         Assert.assertEquals("",str);
     }
 
+    
 }   
 

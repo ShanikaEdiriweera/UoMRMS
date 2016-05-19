@@ -10,13 +10,14 @@ package com.shanika.uomrmsdesktop.Logic;
  * @author Shanika Ediriweera
  */
 public class ModuleGrade {
-    private final int ID;
+    //private final int ID;
     private Student student;
     private Module module;
-    private Grade grade;
+    //private Grade grade;
+    private String grade;
     
-    public ModuleGrade(int ID, Student student, Module module, Grade grade){
-        this.ID = ID;
+    public ModuleGrade(Student student, Module module, String grade){
+        //this.ID = ID;
         this.student = student;
         this.module = module;
         this.grade = grade;
@@ -38,16 +39,11 @@ public class ModuleGrade {
         this.module = module;
     }
 
-    public Grade getGrade() {
+    public String getGrade() {
         return grade;
     }
 
-    public void setGrade(Grade grade) {
+    public void setGrade(String grade) {
         this.grade = grade;
     }
-
-    public int getID() {
-        return ID;
-    }
-    
 }
