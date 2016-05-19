@@ -17,25 +17,17 @@ public class Student extends User{
         this.batch = batch; 
     }
     
-    public static function getOne($id)
-    {
-        $con = Connection::getConnectionObject()->getConnection();
-        // Check connection
-        if (mysqli_connect_errno())
-        {
-            echo "Failed to connect to MySQL: " . mysqli_connect_error();
-        }
-
-        $student = new Student();
-        $stmt = $con->prepare('SELECT id,name,index_no,CGPA,rank FROM student WHERE id=?');
-        $stmt->bind_param("s",$id);
-        $stmt->execute();
-
-        $stmt->bind_result($student->id,$student->name,$student->indexNo,$student->cGPA,$student->rank);
-        $stmt->fetch();
-        $stmt->close();
-        return $student;
-    }
+//    public static Student getStudent(String ID){
+//        $student = new Student();
+//        $stmt = $con->prepare('SELECT id,name,index_no,CGPA,rank FROM student WHERE id=?');
+//        $stmt->bind_param("s",$id);
+//        $stmt->execute();
+//
+//        $stmt->bind_result($student->id,$student->name,$student->indexNo,$student->cGPA,$student->rank);
+//        $stmt->fetch();
+//        $stmt->close();
+//        return $student;
+//    }
 
     public double getcGPA() {
         return cGPA;

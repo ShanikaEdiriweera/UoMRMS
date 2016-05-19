@@ -6,28 +6,19 @@
 package com.shanika.uomrmsdesktop.UI;
 
 import com.shanika.uomrmsdesktop.DA.DBHandler;
-import com.shanika.uomrmsdesktop.DA.MysqlConnect;
-import java.sql.Array;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ImageIcon;
+import com.shanika.uomrmsdesktop.Logic.ResultsHandler;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
+import javax.swing.JFileChooser;
 
 /**
  *
  * @author Shanika Ediriweera
  */
 public class ExaminationUI extends javax.swing.JFrame {
-
+    //creating a results handler
+    private ResultsHandler resultsHandler = null;
     //creating a DBHandler
     private DBHandler dBHandler = null;
-    //creating connection
-    private Connection connection = null;
     
     /**
      * Creates new form ExaminationUI
@@ -87,6 +78,7 @@ public class ExaminationUI extends javax.swing.JFrame {
         jLabel41 = new javax.swing.JLabel();
         jComboBox21 = new javax.swing.JComboBox();
         jButton10 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jComboBox6 = new javax.swing.JComboBox();
@@ -291,7 +283,7 @@ public class ExaminationUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(323, Short.MAX_VALUE))
+                .addContainerGap(327, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Home", jPanel3);
@@ -382,7 +374,7 @@ public class ExaminationUI extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(419, Short.MAX_VALUE))
+                .addContainerGap(423, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Profile", jPanel4);
@@ -435,6 +427,14 @@ public class ExaminationUI extends javax.swing.JFrame {
             }
         });
 
+        jButton16.setText("Import from Excel Sheet");
+        jButton16.setToolTipText("Select the Excel File to add results from an Excel sheet");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -461,7 +461,10 @@ public class ExaminationUI extends javax.swing.JFrame {
                 .addGap(69, 69, 69)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addGap(225, 225, 225)
+                        .addComponent(jButton16))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
@@ -483,7 +486,9 @@ public class ExaminationUI extends javax.swing.JFrame {
                         .addComponent(jLabel16)
                         .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(81, 81, 81)
-                .addComponent(jLabel17)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(jButton16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -661,7 +666,7 @@ public class ExaminationUI extends javax.swing.JFrame {
                     .addComponent(jButton14))
                 .addGap(29, 29, 29)
                 .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
                     .addComponent(jLabel23))
@@ -780,7 +785,7 @@ public class ExaminationUI extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
                     .addComponent(jLabel31))
-                .addContainerGap(494, Short.MAX_VALUE))
+                .addContainerGap(498, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Generate Graphs", jPanel7);
@@ -904,7 +909,7 @@ public class ExaminationUI extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Error Correction", jPanel8);
@@ -964,12 +969,37 @@ public class ExaminationUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
+        // Results submit button
+        
+        
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jComboBox21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox21ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox21ActionPerformed
+
+    //Add Test
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        // Import from Excel Sheet button
+        
+        resultsHandler = new ResultsHandler();
+        
+        //file selector
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new java.io.File("."));
+        fileChooser.setDialogTitle("Select Excel Sheet");
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        if(fileChooser.showOpenDialog(jButton16) == JFileChooser.APPROVE_OPTION){
+            //
+        }
+        String resultsFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+        System.out.println(resultsFilePath);
+        //not working unsupported file format
+        String results = resultsHandler.getDataFromExcel(resultsFilePath);
+        
+        //set results to the textbox
+        jTextArea1.setText(results);
+    }//GEN-LAST:event_jButton16ActionPerformed
 
     //--------------------------------User methods-------------------------------------
     
@@ -1057,6 +1087,7 @@ public class ExaminationUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

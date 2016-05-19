@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,8 +27,10 @@ public class ResultsHandler {
     //add test
     //method to return ModuleGrade array
     public ModuleGrade[] setModuleGrades(Module module, String textBoxString){
+        List moduleGrades = new ArrayList();
         String[] textBoxArray = textBoxString.split(" ");
-        String studentId, grade;
+        String studentId = "";
+        String grade = "";
         
         int counter = 1;
 
@@ -38,36 +42,12 @@ public class ResultsHandler {
                 grade = textBoxElement;
                 
                 //creating Modulegrade object
-                ModuleGrade moduleGrade = new ModuleGrade(student, module, grade)
+                ModuleGrade moduleGrade = new ModuleGrade(studentId, module, grade);
+                moduleGrades.add(moduleGrade);
             }
+            counter++;
         }
-        foreach ($arr as $element){
-            //arr has both ids and grades
-            if($counter%2 == 1){
-                $stuId = $element;
-
-            }else{
-                $grd = $element;
-
-                //getting stu_mod_grd using doctrine
-                $stu_mod_grd = $doc->getRepository('AppBundle:student_module_grade')->findOneBy(array('mCode' => $module,'sId'=>$stuId));
-                //create new stu_mod_grd if not found
-                if($stu_mod_grd==null) 
-                {
-                    $stu_mod_grd = new student_module_grade();
-                    $stu_mod_grd->setMCode($module);
-                    
-                    $stu_mod_grd->setSId($stuId);
-                }
-                //adding grade
-                $stu_mod_grd->setGrade($grd);
-                //die($stu_mod_grd->sId);
-                $em->persist($stu_mod_grd);
-                $em->flush();
-            }
-            $counter++;
-        }
-        return null;
+        return (ModuleGrade[]) moduleGrades.toArray(new ModuleGrade[moduleGrades.size()]);
     }
     
     //add test

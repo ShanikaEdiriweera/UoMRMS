@@ -12,6 +12,7 @@ package com.shanika.uomrmsdesktop.Logic;
 public class ModuleGrade {
     //private final int ID;
     private Student student;
+    private String studentID;
     private Module module;
     //private Grade grade;
     private String grade;
@@ -19,6 +20,12 @@ public class ModuleGrade {
     public ModuleGrade(Student student, Module module, String grade){
         //this.ID = ID;
         this.student = student;
+        this.module = module;
+        this.grade = grade;
+    }
+    
+    public ModuleGrade(String studentID, Module module, String grade){
+        this.studentID = studentID;
         this.module = module;
         this.grade = grade;
     }

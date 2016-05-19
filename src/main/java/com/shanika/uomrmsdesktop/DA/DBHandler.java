@@ -21,8 +21,8 @@ import java.util.logging.Logger;
  */
 public class DBHandler {
     private Statement statement;
-    private ResultSet resultSet;
-    private final MysqlConnect db;
+    private static ResultSet resultSet;
+    private static MysqlConnect db;
     
     public DBHandler()  {
         db = MysqlConnect.getMysqlConnect();
@@ -63,7 +63,7 @@ public class DBHandler {
         return 0;
     }
     
-    public ResultSet getData(PreparedStatement preparedStatement) {
+    public static ResultSet getData(PreparedStatement preparedStatement) {
         try {
             resultSet = preparedStatement.executeQuery();
         } catch (SQLException ex) {
@@ -188,14 +188,48 @@ public class DBHandler {
     }
     
     //add test
+    //method to get a student using ID
+    public static String[] getStudent(String ID){
+        db = MysqlConnect.getMysqlConnect();
+        
+        List studentInfo = new ArrayList();
+ 
+        try {
+            PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("SELECT * FROM student WHERE student.ID = ?");
+            preparedStatement.setString( 1, ID);
+            resultSet = getData(preparedStatement);
+            
+            //adding the row values to the array
+            int numberOfColumns = resultSet.getMetaData().getColumnCount();
+            while (resultSet.next()) {              
+                int i = 1;
+                while(i <= numberOfColumns) {
+                    studentInfo.add(resultSet.getString(i++));
+                }
+            }
+               
+            // convert to a string array
+            return (String[]) studentInfo.toArray(new String[studentInfo.size()]);
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    
+    //add test
     //method to add results to db
     public void setModuleGrades(ModuleGrade[] moduleGrades){      
         try {
             for (ModuleGrade moduleGrade : moduleGrades){
-                PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("INSERT INTO student_has_module VALUES(?,?,?)");
+                PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("INSERT INTO student_has_module VALUES(?,?,?,?)");
                 preparedStatement.setString( 1, moduleGrade.getStudent().getID());
                 preparedStatement.setString( 2, moduleGrade.getModule().getmCode());
-                preparedStatement.setString( 3, moduleGrade.getGrade());
+                preparedStatement.setInt(3, moduleGrade.getModule().getSemester().getID());
+                preparedStatement.setString( 4, moduleGrade.getGrade());
                 int result = setData(preparedStatement);
             }
         } catch (ClassNotFoundException ex) {
