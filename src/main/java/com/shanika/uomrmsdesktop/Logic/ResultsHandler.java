@@ -22,13 +22,13 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
  * @author Shanika Ediriweera
  */
 public class ResultsHandler {
-    public String resultsFilePath = "results.xlsx";
+    public String resultsFilePath = "Results.xlsx";
     
     //add test
     //method to return ModuleGrade array
-    public ModuleGrade[] setModuleGrades(Module module, String textBoxString){
+    public ModuleGrade[] setModuleGrades(String moduleCode, int semesterId, String textBoxString){
         List moduleGrades = new ArrayList();
-        String[] textBoxArray = textBoxString.split(" ");
+        String[] textBoxArray = textBoxString.split("([ ]|[\n])");
         String studentId = "";
         String grade = "";
         
@@ -42,7 +42,7 @@ public class ResultsHandler {
                 grade = textBoxElement;
                 
                 //creating Modulegrade object
-                ModuleGrade moduleGrade = new ModuleGrade(studentId, module, grade);
+                ModuleGrade moduleGrade = new ModuleGrade(studentId, moduleCode, semesterId, grade);
                 moduleGrades.add(moduleGrade);
             }
             counter++;

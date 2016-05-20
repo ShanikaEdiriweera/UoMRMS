@@ -225,11 +225,12 @@ public class DBHandler {
     public void setModuleGrades(ModuleGrade[] moduleGrades){      
         try {
             for (ModuleGrade moduleGrade : moduleGrades){
+                //test
                 PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("INSERT INTO student_has_module VALUES(?,?,?,?)");
-                preparedStatement.setString( 1, moduleGrade.getStudent().getID());
-                preparedStatement.setString( 2, moduleGrade.getModule().getmCode());
-                preparedStatement.setInt(3, moduleGrade.getModule().getSemester().getID());
-                preparedStatement.setString( 4, moduleGrade.getGrade());
+                preparedStatement.setString( 1, moduleGrade.getStudentID());
+                preparedStatement.setString( 2, moduleGrade.getGrade());
+                preparedStatement.setInt(3, moduleGrade.getSemesterId());
+                preparedStatement.setString( 4, moduleGrade.getModuleCode());
                 int result = setData(preparedStatement);
             }
         } catch (ClassNotFoundException ex) {
