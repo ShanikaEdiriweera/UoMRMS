@@ -10,10 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 
@@ -97,13 +94,6 @@ public class ResultsHandler {
             if(file != null){
                 try {
                     file.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(ResultsHandler.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if(workbook != null){
-                try {
-                    workbook.close();
                 } catch (IOException ex) {
                     Logger.getLogger(ResultsHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
