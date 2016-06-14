@@ -22,6 +22,10 @@ public enum Grade {
     I_we(0.0),
     I_ca(0.0),
     ab(0.0);
+
+    public static Grade[] getAll() {
+        return null;
+    }
     
     private double mark;
     

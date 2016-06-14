@@ -1,9 +1,9 @@
-INSERT INTO `faculty` (`ID`, `name`) VALUES
+INSERT INTO `Faculty` (`ID`, `name`) VALUES
 (1, 'Engineering'),
 (2, 'IT'),
 (3, 'Architecture');
 
-INSERT INTO `department` (`ID`, `name`, `Faculty_ID`) VALUES
+INSERT INTO `Department` (`ID`, `name`, `Faculty_ID`) VALUES
 (1, 'Computer Science & Engineering', 1),
 (2, 'Electronic & Telecommunication Engineering', 1),
 (3, 'Civil Engineering', 1),
@@ -14,7 +14,7 @@ INSERT INTO `department` (`ID`, `name`, `Faculty_ID`) VALUES
 (8, 'Material Science Engineering', 1);
 
 
-INSERT INTO `grade` (`grade`, `mark`) VALUES
+INSERT INTO `Grade` (`grade`, `mark`) VALUES
 ('A+', '4.2'),
 ('A', '4.0'),
 ('A-', '3.7'),
@@ -31,7 +31,7 @@ INSERT INTO `grade` (`grade`, `mark`) VALUES
 ('ab', '0.0');
 
 
-INSERT INTO `semester` (`ID`, `name`) VALUES
+INSERT INTO `Semester` (`ID`, `name`) VALUES
 (1, 'Semester 1'),
 (2, 'Semester 2'),
 (3, 'Semester 3'),
@@ -43,6 +43,6 @@ INSERT INTO `semester` (`ID`, `name`) VALUES
 
 
 
-INSERT INTO `module` (`code`, `title`, `credits`, `gpa`, `Semester_ID`) VALUES
+INSERT INTO `Module` (`code`, `title`, `credits`, `gpa`, `Semester_ID`) VALUES
 ('CS-2022', 'OOP', '3.0', 1, 2),
 ('CS-2032', 'OOSD', '3.0', 1, 3);

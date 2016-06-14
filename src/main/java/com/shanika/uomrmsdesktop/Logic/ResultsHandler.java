@@ -102,5 +102,9 @@ public class ResultsHandler {
         return resultsString;
     }
     
+    public static SemesterResult[] getSemesterResults(String faculty, String department, String batch, String semester){
+        
+        return null;
+    }
     
 }

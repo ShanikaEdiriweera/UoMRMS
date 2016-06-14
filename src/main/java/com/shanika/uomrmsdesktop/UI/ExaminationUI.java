@@ -6,7 +6,14 @@
 package com.shanika.uomrmsdesktop.UI;
 
 import com.shanika.uomrmsdesktop.DA.DBHandler;
+import com.shanika.uomrmsdesktop.Logic.Grade;
+import com.shanika.uomrmsdesktop.Logic.Module;
+import com.shanika.uomrmsdesktop.Logic.ModuleHandler;
 import com.shanika.uomrmsdesktop.Logic.ResultsHandler;
+import com.shanika.uomrmsdesktop.Logic.SemesterResult;
+import com.shanika.uomrmsdesktop.Logic.Student;
+import com.shanika.uomrmsdesktop.Logic.StudentHandler;
+import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 
@@ -173,7 +180,7 @@ public class ExaminationUI extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(256, 256, 256)
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
@@ -577,8 +584,18 @@ public class ExaminationUI extends javax.swing.JFrame {
         jLabel24.setText("Overall GPA");
 
         jButton11.setText("Generate SGPA");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jButton12.setText("Generate Semester Ranks");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         jButton13.setText("Generate CGPA");
 
@@ -596,14 +613,21 @@ public class ExaminationUI extends javax.swing.JFrame {
                     .addComponent(jLabel19)
                     .addComponent(jLabel18))
                 .addGap(26, 26, 26)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jButton11)
-                        .addGap(59, 59, 59)
-                        .addComponent(jButton12)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBox9, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox10, 0, 129, Short.MAX_VALUE))
+                        .addGap(284, 284, 284))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jButton11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton12))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jComboBox7, 0, 164, Short.MAX_VALUE)
@@ -611,22 +635,14 @@ public class ExaminationUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel21)
-                                    .addComponent(jLabel22))
-                                .addGap(65, 65, 65))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41)))
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox9, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox10, 0, 129, Short.MAX_VALUE))
-                        .addGap(284, 284, 284))))
+                                    .addComponent(jLabel22))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton13)
+                        .addGap(341, 341, 341))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(jButton13)
-                        .addGap(68, 68, 68)
                         .addComponent(jButton14)
                         .addGap(143, 143, 143))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
@@ -677,7 +693,7 @@ public class ExaminationUI extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Process Results", jPanel6);
@@ -1014,6 +1030,122 @@ public class ExaminationUI extends javax.swing.JFrame {
         //set results to the textbox
         jTextArea1.setText(results);
     }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // generate SGPA button
+ 
+        String faculty = jComboBox6.getSelectedItem().toString();
+        String department = jComboBox7.getSelectedItem().toString();
+        String batch = jComboBox9.getSelectedItem().toString();
+        String semester = jComboBox10.getSelectedItem().toString();
+        
+        SemesterResult[] semesterResults = ResultsHandler.getSemesterResults(faculty, department, batch, semester);
+        //$results = $this->getDoctrine()->getRepository('AppBundle:Semester_results')->findBy(array('semId' => $id));
+
+        Student[] students = StudentHandler.getAll(faculty, department, batch);
+        //$students = $this->getDoctrine()->getRepository('AppBundle:Student')->findAll();
+        
+        Module[] modules = ModuleHandler.getAll(semester);
+        //$modules = $this->getDoctrine()->getRepository('AppBundle:Module')->findBy(array('semId' => $id));
+        
+        ArrayList moduleCodes = null;
+        //$moduleCodes = array();
+        ArrayList moduleCredits = null;
+        //$moduleCredits = array();
+        ArrayList moduleIsGpa = null;
+        //$moduleIsGpa = array();   //array to keep GPA/non-GPA
+        
+        for (Module module : modules) {
+            moduleCodes.add(module.getmCode());
+            moduleCredits.add(module.getCredits());
+            moduleIsGpa.add(module.isGpa());
+        }
+//        foreach ($modules as $obj) {
+//           array_push($moduleCodes, $obj->getCode());
+//           $moduleCredits[$obj->getCode()] = $obj->getCredits();
+//           $moduleIsGpa[$obj->getCode()] = $obj->getGpa();
+//        }
+///////////////////
+//        Grade[] grades = Grade.getAll();
+//        $gradeObjects = $this->getDoctrine()->getRepository('AppBundle:Grade')->findAll();
+//        $grades = array();
+//        foreach ($gradeObjects as $obj) {
+//            $grades[$obj->getGrade()] = $obj->getMark();
+//
+//        }
+//
+//
+//        $em = $this->getDoctrine()->getManager();
+//        
+//
+//        foreach ($students as $student) {
+//            $gs = $student->getGrades();
+//
+//            $totalMarks = 0.0000;
+//            $totalCredits = 0.0;
+//            
+//
+//            foreach ($gs as $g) {
+//                //echo $g->getMCode();
+//                $code = $g->getMCode();
+//                if(in_array($code, $moduleCodes) && $moduleIsGpa[$code])
+//                  {             
+//                    $totalMarks+=$grades[$g->getGrade()]*$moduleCredits[$code];
+//                    $totalCredits += $moduleCredits[$g->getMCode()];
+//                }
+//            }
+//
+//            $result = $this->getDoctrine()->getRepository('AppBundle:Semester_results')->findOneBy(array('semId' => $id,'stuId'=>$student->getId()));
+//            if($result==null) 
+//                {
+//                    $result = new Semester_results();
+//                    $result->setSemId($id);
+//                    $result->setStuId($student->getId());
+//
+//                }
+//
+//            if($totalCredits>0)
+//                $result->setGPA($totalMarks/$totalCredits);
+//            else
+//                $result->setGPA(0);
+//
+//            $result->setSemCredits($totalCredits);
+//
+//            $em->persist($result);
+//            $em->flush();
+//
+//        }
+//
+//        
+//        return $this->redirectToRoute('semester_home');
+        
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // Generate semester ranks button
+        
+//        $results = $this->getDoctrine()->getRepository('AppBundle:Semester_results')->findBy(array('semId' => $id), array('gPA' => 'DESC') );
+//        $rank = 1;
+//        $lastGpa = 5.0000;
+//
+//        //to catch equal ranks
+//        $lastRank = 0;
+//        // set ranks 
+//        foreach ($results as $result) {
+//            if ($result->getGpa() == $lastGpa) {
+//                $result->setRank($lastRank);
+//            }else{
+//                $result->setRank($rank);
+//                $lastRank = $rank;
+//            }
+//            $rank++;
+//            $lastGpa = $result->getGpa();
+//
+//            $em->persist($result);
+//            $em->flush();
+//        }
+
+    }//GEN-LAST:event_jButton12ActionPerformed
 
     //--------------------------------User methods-------------------------------------
     
