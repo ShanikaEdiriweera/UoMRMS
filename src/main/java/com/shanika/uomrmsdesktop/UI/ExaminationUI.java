@@ -1036,7 +1036,7 @@ public class ExaminationUI extends javax.swing.JFrame {
     //test hashmaps,
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // generate SGPA button
- 
+        System.out.println("start");
         String faculty = jComboBox6.getSelectedItem().toString();
         String department = jComboBox7.getSelectedItem().toString();
         String batch = jComboBox9.getSelectedItem().toString();
@@ -1044,20 +1044,20 @@ public class ExaminationUI extends javax.swing.JFrame {
         
         SemesterResult[] semesterResults = ResultsHandler.getSemesterResults(faculty, department, Integer.valueOf(batch), semester);
         
-        HashMap<String,SemesterResult> results = null;
+        HashMap<String,SemesterResult> results = new HashMap<>();
         for (SemesterResult semesterResult : semesterResults) {
-            results.put(semesterResult.getStudent().getID(),semesterResult);
+            results.put(semesterResult.getStudentId(),semesterResult);
         }
         
-        Student[] students = StudentHandler.getAll(faculty, department, batch);
+        Student[] students = StudentHandler.getAll(faculty, department, Integer.valueOf(batch));
         
         Module[] modules = ModuleHandler.getAll(semester);
         
-        ArrayList moduleCodes = null;
+        ArrayList moduleCodes = new ArrayList();
         
-        HashMap<String, Double> moduleCredits = null;
+        HashMap<String, Double> moduleCredits = new HashMap<String, Double>();
         
-        HashMap<String, Boolean> moduleIsGpa = null;
+        HashMap<String, Boolean> moduleIsGpa = new HashMap<String, Boolean>();
         
         for (Module module : modules) {
             moduleCodes.add(module.getmCode());
@@ -1067,7 +1067,7 @@ public class ExaminationUI extends javax.swing.JFrame {
 
         Grade[] grades = Grade.getAll();
         
-        HashMap<String, Double> gradeMarks = null;
+        HashMap<String, Double> gradeMarks = new HashMap<String, Double>();
         
         for (Grade grade : grades) {
             gradeMarks.put(grade.getGrade(),grade.getMark());

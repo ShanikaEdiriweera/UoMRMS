@@ -1,5 +1,7 @@
 package com.shanika.uomrmsdesktop.Logic;
 
+import com.shanika.uomrmsdesktop.DA.DBHandler;
+
 /**
  *
  * @author Shanika Ediriweera
@@ -66,7 +68,7 @@ public class Grade{
     
     //from db
     public static Grade[] getAll() {
-        Grade[] grades = null;
+        Grade[] grades = DBHandler.getGrades();
         return grades;
     }
 }

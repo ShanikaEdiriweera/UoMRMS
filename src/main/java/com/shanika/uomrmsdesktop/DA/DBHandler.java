@@ -5,8 +5,16 @@
  */
 package com.shanika.uomrmsdesktop.DA;
 
+import com.shanika.uomrmsdesktop.Logic.Department;
+import com.shanika.uomrmsdesktop.Logic.Faculty;
+import com.shanika.uomrmsdesktop.Logic.Gender;
+import com.shanika.uomrmsdesktop.Logic.Grade;
+import com.shanika.uomrmsdesktop.Logic.Module;
 import com.shanika.uomrmsdesktop.Logic.ModuleGrade;
+import com.shanika.uomrmsdesktop.Logic.Semester;
 import com.shanika.uomrmsdesktop.Logic.SemesterResult;
+import com.shanika.uomrmsdesktop.Logic.Student;
+import com.shanika.uomrmsdesktop.Logic.UserType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -258,6 +266,7 @@ public class DBHandler {
         }
     }
     
+    //tested
     public static SemesterResult[] getSemesterResults(String faculty, String department, int batch, int semester){
         List semesterResults = new ArrayList();;
         try {           
@@ -287,8 +296,99 @@ public class DBHandler {
     }
     
     //get from db
-    public static ModuleGrade[] getModuleGrades(String sudentId) {
-        ModuleGrade[] moduleGrades = null;
-        return moduleGrades;
+    //tested
+    public static ModuleGrade[] getModuleGrades(String studentId) {
+        List moduleGrades = new ArrayList();;
+        try {           
+            db = MysqlConnect.getMysqlConnect();
+            PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("SELECT * FROM Student_has_Module WHERE Student_ID = ?");
+            preparedStatement.setString(1, studentId);
+            ResultSet resultSet = getData(preparedStatement);
+            
+            while (resultSet.next()) {
+                ModuleGrade moduleGrade = new ModuleGrade(studentId, resultSet.getString("Module_code"), resultSet.getInt("Module_Semester_ID"), resultSet.getString("Grade_grade"));
+                moduleGrades.add(moduleGrade);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // convert to a SemesterResults array
+        return (ModuleGrade[]) moduleGrades.toArray(new ModuleGrade[moduleGrades.size()]);
+    }
+    
+    //tested
+    public static Student[] getStudents(String faculty, String department, int batch) {
+        List students = new ArrayList();;
+        try {           
+            db = MysqlConnect.getMysqlConnect();
+            PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("SELECT S.ID as S_ID, S.name as S_name, CGPA, rank, User_ID, Department_ID, D.name as D_name, Faculty_ID, Batch_ID FROM Student S INNER JOIN Department D ON S.Department_ID=D.ID INNER JOIN Batch B ON S.Batch_ID=B.ID WHERE D.name = ? AND B.year = ?");
+            preparedStatement.setString(1, department);
+            preparedStatement.setInt(2, batch);
+            ResultSet resultSet = getData(preparedStatement);
+            
+            while (resultSet.next()) {
+                Student student = new Student();
+                student.setID(resultSet.getString("S_ID"));
+                student.setName(resultSet.getString("S_name"));
+                student.setcGPA(resultSet.getDouble("CGPA"));
+                student.setRank(resultSet.getInt("rank"));
+                student.setUserId(resultSet.getString("User_ID"));
+                student.setDepartment(new Department(resultSet.getInt("Department_ID"), resultSet.getString("D_name"), new Faculty(resultSet.getInt("Faculty_ID"), faculty)));
+                student.setBatch(resultSet.getInt("Batch_ID"));
+                students.add(student);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // convert to a students array
+        return (Student[]) students.toArray(new Student[students.size()]);
+    }
+    
+    //test
+    public static Module[] getModules(int semester) {
+        List modules = new ArrayList();;
+        try {           
+            db = MysqlConnect.getMysqlConnect();
+            PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("SELECT * FROM Module INNER JOIN Semester ON Module.Semester_ID=Semester.ID WHERE Semester_ID = ?");
+            preparedStatement.setInt(1, semester);
+            ResultSet resultSet = getData(preparedStatement);
+            
+            while (resultSet.next()) {
+                Module module = new Module(resultSet.getString("code"), resultSet.getString("title"), new Semester(resultSet.getInt("Semester_ID"), resultSet.getString("name")), resultSet.getDouble("credits"), resultSet.getBoolean("gpa"));
+                modules.add(module);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // convert to a students array
+        return (Module[]) modules.toArray(new Module[modules.size()]);
+    }
+    
+    //add update query
+    //test
+    public static Grade[] getGrades() {
+        List grades = new ArrayList();;
+        try {           
+            db = MysqlConnect.getMysqlConnect();
+            PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("SELECT * FROM Grade");
+            ResultSet resultSet = getData(preparedStatement);
+            
+            while (resultSet.next()) {
+                Grade grade = new Grade(resultSet.getString("grade"), resultSet.getDouble("mark"));
+                grades.add(grade);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // convert to a students array
+        return (Grade[]) grades.toArray(new Grade[grades.size()]);
     }
 }

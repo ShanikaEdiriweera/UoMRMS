@@ -5,12 +5,16 @@
  */
 package com.shanika.uomrmsdesktop.Logic;
 
+import com.shanika.uomrmsdesktop.DA.DBHandler;
+
 /**
  *
  * @author Shanika Ediriweera
  */
 public class ModuleHandler {
     public static Module[] getAll(int semester) {
-        return null;
+        Module[] modules = DBHandler.getModules(semester);
+        return modules;
     }
+    
 }

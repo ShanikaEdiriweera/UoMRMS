@@ -5,12 +5,15 @@
  */
 package com.shanika.uomrmsdesktop.Logic;
 
+import com.shanika.uomrmsdesktop.DA.DBHandler;
+
 /**
  *
  * @author Shanika Ediriweera
  */
 public class StudentHandler {
-    public static Student[] getAll(String faculty, String department, String batch) {
-        return null;
+    public static Student[] getAll(String faculty, String department, int batch) {
+        Student[] students = DBHandler.getStudents(faculty, department, batch);
+        return students;
     }
 }

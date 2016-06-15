@@ -15,6 +15,9 @@ public class User {
     private Department department;
     private String state=State.ACTIVE.getState();
     
+    public User(){
+        
+    }
     public User(String ID, String username, String password, String name, Gender gender, UserType userType, Department department, String state){
         this.ID = ID;
         this.username = username;
@@ -80,5 +83,13 @@ public class User {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }
