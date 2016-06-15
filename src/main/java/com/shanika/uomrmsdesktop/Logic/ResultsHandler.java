@@ -1,5 +1,6 @@
 package com.shanika.uomrmsdesktop.Logic;
 
+import com.shanika.uomrmsdesktop.DA.DBHandler;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,6 +20,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
  * @author Shanika Ediriweera
  */
 public class ResultsHandler {
+    
     public String resultsFilePath = "Results.xlsx";
     
     //add test
@@ -102,9 +104,16 @@ public class ResultsHandler {
         return resultsString;
     }
     
-    public static SemesterResult[] getSemesterResults(String faculty, String department, String batch, String semester){
+    public static SemesterResult[] getSemesterResults(String faculty, String department, int batch, int semester){
+        SemesterResult[] semesterResults = DBHandler.getSemesterResults(faculty, department, batch, semester);
         
-        return null;
+        return semesterResults;
+    }
+    
+    //get from db
+    public static ModuleGrade[] getModuleGrades(String id) {
+        ModuleGrade[] moduleGrades = DBHandler.getModuleGrades(id);
+        return moduleGrades;
     }
     
 }

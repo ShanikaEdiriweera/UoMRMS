@@ -10,11 +10,19 @@ package com.shanika.uomrmsdesktop.Logic;
  * @author Shanika Ediriweera
  */
 public class SemesterResult {
-    private final int ID;
+    private int ID;
     private Student student;
     private Semester semester;
     private double sGPA;
     private int sRank;
+    
+    private double semCredits;
+    private String studentId;
+    private int semesterId;
+    
+    public SemesterResult(){
+        
+    }
     
     public SemesterResult(int ID, Student student, Semester semester, double sGPA, int sRank){
         this.ID = ID;
@@ -58,6 +66,34 @@ public class SemesterResult {
 
     public int getID() {
         return ID;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public int getSemesterId() {
+        return semesterId;
+    }
+
+    public void setSemesterId(int semesterId) {
+        this.semesterId = semesterId;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public double getSemCredits() {
+        return semCredits;
+    }
+
+    public void setSemCredits(double semCredits) {
+        this.semCredits = semCredits;
     }
     
     

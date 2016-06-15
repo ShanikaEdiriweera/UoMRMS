@@ -10,7 +10,7 @@ package com.shanika.uomrmsdesktop.Logic;
  * @author Shanika Ediriweera
  */
 public class ModuleHandler {
-    public static Module[] getAll(String semester) {
+    public static Module[] getAll(int semester) {
         return null;
     }
 }

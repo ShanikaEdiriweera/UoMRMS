@@ -8,12 +8,14 @@ package com.shanika.uomrmsdesktop.UI;
 import com.shanika.uomrmsdesktop.DA.DBHandler;
 import com.shanika.uomrmsdesktop.Logic.Grade;
 import com.shanika.uomrmsdesktop.Logic.Module;
+import com.shanika.uomrmsdesktop.Logic.ModuleGrade;
 import com.shanika.uomrmsdesktop.Logic.ModuleHandler;
 import com.shanika.uomrmsdesktop.Logic.ResultsHandler;
 import com.shanika.uomrmsdesktop.Logic.SemesterResult;
 import com.shanika.uomrmsdesktop.Logic.Student;
 import com.shanika.uomrmsdesktop.Logic.StudentHandler;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 
@@ -1001,7 +1003,7 @@ public class ExaminationUI extends javax.swing.JFrame {
         int semester = jComboBox5.getSelectedIndex()+1;
         dBHandler.setModuleGrades(resultsHandler.setModuleGrades(module, semester, textBoxString));
         
-        jButton10.setText("");
+        jTextArea1.setText("");
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jComboBox21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox21ActionPerformed
@@ -1031,94 +1033,76 @@ public class ExaminationUI extends javax.swing.JFrame {
         jTextArea1.setText(results);
     }//GEN-LAST:event_jButton16ActionPerformed
 
+    //test hashmaps,
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // generate SGPA button
  
         String faculty = jComboBox6.getSelectedItem().toString();
         String department = jComboBox7.getSelectedItem().toString();
         String batch = jComboBox9.getSelectedItem().toString();
-        String semester = jComboBox10.getSelectedItem().toString();
+        int semester = jComboBox10.getSelectedIndex()+1;
         
-        SemesterResult[] semesterResults = ResultsHandler.getSemesterResults(faculty, department, batch, semester);
-        //$results = $this->getDoctrine()->getRepository('AppBundle:Semester_results')->findBy(array('semId' => $id));
-
+        SemesterResult[] semesterResults = ResultsHandler.getSemesterResults(faculty, department, Integer.valueOf(batch), semester);
+        
+        HashMap<String,SemesterResult> results = null;
+        for (SemesterResult semesterResult : semesterResults) {
+            results.put(semesterResult.getStudent().getID(),semesterResult);
+        }
+        
         Student[] students = StudentHandler.getAll(faculty, department, batch);
-        //$students = $this->getDoctrine()->getRepository('AppBundle:Student')->findAll();
         
         Module[] modules = ModuleHandler.getAll(semester);
-        //$modules = $this->getDoctrine()->getRepository('AppBundle:Module')->findBy(array('semId' => $id));
         
         ArrayList moduleCodes = null;
-        //$moduleCodes = array();
-        ArrayList moduleCredits = null;
-        //$moduleCredits = array();
-        ArrayList moduleIsGpa = null;
-        //$moduleIsGpa = array();   //array to keep GPA/non-GPA
+        
+        HashMap<String, Double> moduleCredits = null;
+        
+        HashMap<String, Boolean> moduleIsGpa = null;
         
         for (Module module : modules) {
             moduleCodes.add(module.getmCode());
-            moduleCredits.add(module.getCredits());
-            moduleIsGpa.add(module.isGpa());
+            moduleCredits.put(module.getmCode(),module.getCredits());
+            moduleIsGpa.put(module.getmCode(),module.isGpa());
         }
-//        foreach ($modules as $obj) {
-//           array_push($moduleCodes, $obj->getCode());
-//           $moduleCredits[$obj->getCode()] = $obj->getCredits();
-//           $moduleIsGpa[$obj->getCode()] = $obj->getGpa();
-//        }
-///////////////////
-//        Grade[] grades = Grade.getAll();
-//        $gradeObjects = $this->getDoctrine()->getRepository('AppBundle:Grade')->findAll();
-//        $grades = array();
-//        foreach ($gradeObjects as $obj) {
-//            $grades[$obj->getGrade()] = $obj->getMark();
-//
-//        }
-//
-//
-//        $em = $this->getDoctrine()->getManager();
-//        
-//
-//        foreach ($students as $student) {
-//            $gs = $student->getGrades();
-//
-//            $totalMarks = 0.0000;
-//            $totalCredits = 0.0;
-//            
-//
-//            foreach ($gs as $g) {
-//                //echo $g->getMCode();
-//                $code = $g->getMCode();
-//                if(in_array($code, $moduleCodes) && $moduleIsGpa[$code])
-//                  {             
-//                    $totalMarks+=$grades[$g->getGrade()]*$moduleCredits[$code];
-//                    $totalCredits += $moduleCredits[$g->getMCode()];
-//                }
-//            }
-//
-//            $result = $this->getDoctrine()->getRepository('AppBundle:Semester_results')->findOneBy(array('semId' => $id,'stuId'=>$student->getId()));
-//            if($result==null) 
-//                {
-//                    $result = new Semester_results();
-//                    $result->setSemId($id);
-//                    $result->setStuId($student->getId());
-//
-//                }
-//
-//            if($totalCredits>0)
-//                $result->setGPA($totalMarks/$totalCredits);
-//            else
-//                $result->setGPA(0);
-//
-//            $result->setSemCredits($totalCredits);
-//
-//            $em->persist($result);
-//            $em->flush();
-//
-//        }
-//
-//        
-//        return $this->redirectToRoute('semester_home');
+
+        Grade[] grades = Grade.getAll();
         
+        HashMap<String, Double> gradeMarks = null;
+        
+        for (Grade grade : grades) {
+            gradeMarks.put(grade.getGrade(),grade.getMark());
+        }
+
+        for(Student student : students){
+            ModuleGrade[] moduleGrades = ResultsHandler.getModuleGrades(student.getID());
+            
+            double totalMarks = 0.0000;
+            double totalCredits = 0.0;
+            
+            for(ModuleGrade moduleGrade : moduleGrades) {
+                String mCode = moduleGrade.getModuleCode();
+                if(moduleCodes.contains(mCode) && moduleIsGpa.get(mCode)){             
+                    totalMarks += gradeMarks.get(moduleGrade.getGrade()) * moduleCredits.get(mCode);
+                    totalCredits += moduleCredits.get(mCode);
+                }
+            }
+            
+            SemesterResult semesterResult = results.get(student.getID());
+            if(semesterResult==null){
+                semesterResult = new SemesterResult();
+                semesterResult.setStudentId(student.getID());
+                semesterResult.setSemesterId(semester);
+            }
+
+            if(totalCredits>0)
+                semesterResult.setsGPA(totalMarks/totalCredits);
+            else
+                semesterResult.setsGPA(0);
+
+            semesterResult.setSemCredits(totalCredits);
+
+            dBHandler.setSemesterResults(semesterResult);
+        }
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
