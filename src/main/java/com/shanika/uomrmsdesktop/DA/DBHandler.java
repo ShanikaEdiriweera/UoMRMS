@@ -63,7 +63,7 @@ public class DBHandler {
         return resultSet;
     }
 
-    public int setData(PreparedStatement preparedStatement)  {
+    public static int setData(PreparedStatement preparedStatement)  {
         try {
             int result = preparedStatement.executeUpdate();
             return result;
@@ -249,6 +249,29 @@ public class DBHandler {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    //test
+    public static void setStudent(Student student){
+        try {
+            db = MysqlConnect.getMysqlConnect();
+            
+            PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("INSERT INTO Student VALUES(?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE CGPA=?,rank=?");
+            preparedStatement.setString( 1, student.getID());
+            preparedStatement.setString( 2, student.getName());
+            preparedStatement.setDouble(3, student.getcGPA());
+            preparedStatement.setInt( 4, student.getRank());
+            preparedStatement.setString( 5, student.getUserId());
+            preparedStatement.setInt( 6, student.getDepartment().getID());
+            preparedStatement.setInt( 7, student.getBatch());
+            preparedStatement.setDouble(8, student.getcGPA());
+            preparedStatement.setInt( 9, student.getRank());
+            int result = setData(preparedStatement);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     //test
     public void setSemesterResults(SemesterResult semesterResult){
@@ -280,6 +303,33 @@ public class DBHandler {
             preparedStatement.setInt(1, semester);
             preparedStatement.setString(2, department);
             preparedStatement.setInt(3, batch);
+            ResultSet resultSet = getData(preparedStatement);
+            
+            while (resultSet.next()) {
+                SemesterResult semesterResult = new SemesterResult();
+                semesterResult.setStudentId(resultSet.getString("Student_ID"));
+                semesterResult.setSemesterId(resultSet.getInt("Semester_ID"));
+                semesterResult.setsGPA(resultSet.getDouble("SGPA"));
+                semesterResult.setsRank(resultSet.getInt("srank"));
+                semesterResult.setSemCredits(resultSet.getDouble("sem_credits"));
+                semesterResults.add(semesterResult);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // convert to a SemesterResults array
+        return (SemesterResult[]) semesterResults.toArray(new SemesterResult[semesterResults.size()]);
+    }
+    
+    public static SemesterResult[] getSemesterResults(String faculty, String department, int batch){
+        List semesterResults = new ArrayList();;
+        try {           
+            db = MysqlConnect.getMysqlConnect();
+            PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("SELECT Student_ID,Semester_ID,SGPA,SSR.rank as srank,sem_credits FROM Student_Semester_Results SSR INNER JOIN Student S ON SSR.Student_ID=S.ID INNER JOIN Department D ON S.Department_ID=D.ID INNER JOIN Batch B ON S.Batch_ID=B.ID WHERE D.name = ? AND B.year = ?");
+            preparedStatement.setString(1, department);
+            preparedStatement.setInt(2, batch);
             ResultSet resultSet = getData(preparedStatement);
             
             while (resultSet.next()) {
@@ -359,6 +409,36 @@ public class DBHandler {
         try {           
             db = MysqlConnect.getMysqlConnect();
             PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("SELECT S.ID as S_ID, S.name as S_name, CGPA, rank, User_ID, Department_ID, D.name as D_name, Faculty_ID, Batch_ID FROM Student S INNER JOIN Department D ON S.Department_ID=D.ID INNER JOIN Batch B ON S.Batch_ID=B.ID WHERE D.name = ? AND B.year = ?");
+            preparedStatement.setString(1, department);
+            preparedStatement.setInt(2, batch);
+            ResultSet resultSet = getData(preparedStatement);
+            
+            while (resultSet.next()) {
+                Student student = new Student();
+                student.setID(resultSet.getString("S_ID"));
+                student.setName(resultSet.getString("S_name"));
+                student.setcGPA(resultSet.getDouble("CGPA"));
+                student.setRank(resultSet.getInt("rank"));
+                student.setUserId(resultSet.getString("User_ID"));
+                student.setDepartment(new Department(resultSet.getInt("Department_ID"), resultSet.getString("D_name"), new Faculty(resultSet.getInt("Faculty_ID"), faculty)));
+                student.setBatch(resultSet.getInt("Batch_ID"));
+                students.add(student);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // convert to a students array
+        return (Student[]) students.toArray(new Student[students.size()]);
+    }
+    
+    //test
+    public static Student[] getStudentsOrdered(String faculty, String department, int batch) {
+        List students = new ArrayList();;
+        try {           
+            db = MysqlConnect.getMysqlConnect();
+            PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("SELECT S.ID as S_ID, S.name as S_name, CGPA, rank, User_ID, Department_ID, D.name as D_name, Faculty_ID, Batch_ID FROM Student S INNER JOIN Department D ON S.Department_ID=D.ID INNER JOIN Batch B ON S.Batch_ID=B.ID WHERE D.name = ? AND B.year = ? ORDER BY CGPA DESC");
             preparedStatement.setString(1, department);
             preparedStatement.setInt(2, batch);
             ResultSet resultSet = getData(preparedStatement);

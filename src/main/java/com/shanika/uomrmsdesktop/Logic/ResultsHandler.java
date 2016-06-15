@@ -20,6 +20,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
  * @author Shanika Ediriweera
  */
 public class ResultsHandler {
+
     
     public String resultsFilePath = "Results.xlsx";
     
@@ -106,6 +107,13 @@ public class ResultsHandler {
     
     public static SemesterResult[] getSemesterResults(String faculty, String department, int batch, int semester){
         SemesterResult[] semesterResults = DBHandler.getSemesterResults(faculty, department, batch, semester);
+        
+        return semesterResults;
+    }
+    
+    
+    public static SemesterResult[] getSemesterResults(String faculty, String department, int batch) {
+        SemesterResult[] semesterResults = DBHandler.getSemesterResults(faculty, department, batch);
         
         return semesterResults;
     }

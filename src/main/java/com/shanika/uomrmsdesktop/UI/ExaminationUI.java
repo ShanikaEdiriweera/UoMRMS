@@ -602,8 +602,18 @@ public class ExaminationUI extends javax.swing.JFrame {
         });
 
         jButton13.setText("Generate CGPA");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         jButton14.setText("Generate Overall Ranks");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
 
         jButton15.setText("Publish");
 
@@ -1156,6 +1166,67 @@ public class ExaminationUI extends javax.swing.JFrame {
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // generate cgpa
+        String faculty = jComboBox6.getSelectedItem().toString();
+        String department = jComboBox7.getSelectedItem().toString();
+        String batch = jComboBox9.getSelectedItem().toString();
+                
+        Student[] students = StudentHandler.getAll(faculty, department, Integer.valueOf(batch));
+        SemesterResult[] semesterResults = ResultsHandler.getSemesterResults(faculty, department, Integer.valueOf(batch));
+
+        //looping through each student
+        for (Student student : students) {
+            double totalMarks = 0.0000;
+            double totalCredits = 0.0;
+
+            //looping through each semester_result
+            for (SemesterResult semesterResult : semesterResults) {
+                if(student.getID().equals(semesterResult.getStudentId())){
+                    totalMarks += semesterResult.getsGPA() * semesterResult.getSemCredits();
+                    totalCredits += semesterResult.getSemCredits();
+                }
+            }
+
+            //setting student CGPA
+            if(totalCredits>0)
+                student.setcGPA(totalMarks/totalCredits);
+            else
+                student.setcGPA(0);
+
+            DBHandler.setStudent(student);
+        }
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        // generate overall ranks
+        String faculty = jComboBox6.getSelectedItem().toString();
+        String department = jComboBox7.getSelectedItem().toString();
+        String batch = jComboBox9.getSelectedItem().toString();
+        
+        Student[] students = StudentHandler.getAllOrdered(faculty, department, Integer.valueOf(batch));
+        
+        int rank = 1;
+        double lastGpa = 5.0000;
+        
+        //to catch equal ranks
+        int lastRank = 0;
+        
+        // set ranks 
+        for (Student student : students) {
+            if (student.getcGPA() == lastGpa) {
+                student.setRank(lastRank);
+            }else{
+                student.setRank(rank);
+                lastRank = rank;
+            }
+            rank++;
+            lastGpa = student.getcGPA();
+
+            DBHandler.setStudent(student);
+        }
+    }//GEN-LAST:event_jButton14ActionPerformed
 
     //--------------------------------User methods-------------------------------------
     

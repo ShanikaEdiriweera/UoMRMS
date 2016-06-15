@@ -16,4 +16,9 @@ public class StudentHandler {
         Student[] students = DBHandler.getStudents(faculty, department, batch);
         return students;
     }
+
+    public static Student[] getAllOrdered(String faculty, String department, int batch) {
+        Student[] students = DBHandler.getStudentsOrdered(faculty, department, batch);
+        return students;
+    }
 }
