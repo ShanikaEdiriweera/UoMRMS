@@ -253,11 +253,16 @@ public class DBHandler {
     //test
     public void setSemesterResults(SemesterResult semesterResult){
         try {
-            PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("INSERT INTO Student_Semester_Results(Student_ID,Semester_ID,SGPA,sem_credits) VALUES(?,?,?,?)");
+            PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("INSERT INTO Student_Semester_Results(Student_ID,Semester_ID,SGPA,rank,sem_credits) VALUES(?,?,?,?,?) ON DUPLICATE KEY UPDATE SGPA=?,rank=?,sem_credits=?");
             preparedStatement.setString(1, semesterResult.getStudentId());
             preparedStatement.setInt( 2, semesterResult.getSemesterId());
             preparedStatement.setDouble(3, semesterResult.getsGPA());
-            preparedStatement.setDouble(4, semesterResult.getSemCredits());
+            preparedStatement.setInt(4, semesterResult.getsRank());
+            preparedStatement.setDouble(5, semesterResult.getSemCredits());
+            preparedStatement.setDouble(6, semesterResult.getsGPA());
+            preparedStatement.setInt(7, semesterResult.getsRank());
+            preparedStatement.setDouble(8, semesterResult.getSemCredits());
+            
             int result = setData(preparedStatement);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -272,6 +277,36 @@ public class DBHandler {
         try {           
             db = MysqlConnect.getMysqlConnect();
             PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("SELECT Student_ID,Semester_ID,SGPA,SMR.rank as srank,sem_credits FROM Student_Semester_Results SMR INNER JOIN Student S ON SMR.Student_ID=S.ID INNER JOIN Department D ON S.Department_ID=D.ID INNER JOIN Batch B ON S.Batch_ID=B.ID WHERE SMR.Semester_ID = ? AND D.name = ? AND B.year = ?");
+            preparedStatement.setInt(1, semester);
+            preparedStatement.setString(2, department);
+            preparedStatement.setInt(3, batch);
+            ResultSet resultSet = getData(preparedStatement);
+            
+            while (resultSet.next()) {
+                SemesterResult semesterResult = new SemesterResult();
+                semesterResult.setStudentId(resultSet.getString("Student_ID"));
+                semesterResult.setSemesterId(resultSet.getInt("Semester_ID"));
+                semesterResult.setsGPA(resultSet.getDouble("SGPA"));
+                semesterResult.setsRank(resultSet.getInt("srank"));
+                semesterResult.setSemCredits(resultSet.getDouble("sem_credits"));
+                semesterResults.add(semesterResult);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // convert to a SemesterResults array
+        return (SemesterResult[]) semesterResults.toArray(new SemesterResult[semesterResults.size()]);
+    }
+    
+    //test
+    //method to get sem results ordered  desc for ranking
+    public static SemesterResult[] getSemesterResultsOrdered(String department, int batch, int semester){
+        List semesterResults = new ArrayList();;
+        try {           
+            db = MysqlConnect.getMysqlConnect();
+            PreparedStatement preparedStatement = db.getDBConnection().prepareStatement("SELECT Student_ID,Semester_ID,SGPA,SMR.rank as srank,sem_credits FROM Student_Semester_Results SMR INNER JOIN Student S ON SMR.Student_ID=S.ID INNER JOIN Department D ON S.Department_ID=D.ID INNER JOIN Batch B ON S.Batch_ID=B.ID WHERE SMR.Semester_ID = ? AND D.name = ? AND B.year = ? ORDER BY SGPA DESC");
             preparedStatement.setInt(1, semester);
             preparedStatement.setString(2, department);
             preparedStatement.setInt(3, batch);
@@ -370,7 +405,7 @@ public class DBHandler {
         return (Module[]) modules.toArray(new Module[modules.size()]);
     }
     
-    //add update query
+    
     //test
     public static Grade[] getGrades() {
         List grades = new ArrayList();;

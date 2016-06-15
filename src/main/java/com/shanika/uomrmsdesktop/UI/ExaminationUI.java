@@ -121,6 +121,8 @@ public class ExaminationUI extends javax.swing.JFrame {
         jComboBox15 = new javax.swing.JComboBox();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
+        jButton17 = new javax.swing.JButton();
+        jButton18 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
@@ -736,6 +738,15 @@ public class ExaminationUI extends javax.swing.JFrame {
         jLabel31.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel31.setText("Year GPA");
 
+        jButton17.setText("Generate");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
+
+        jButton18.setText("Generate");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -750,19 +761,23 @@ public class ExaminationUI extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createSequentialGroup()
                             .addGap(115, 115, 115)
                             .addComponent(jLabel27))))
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel31)
-                        .addGap(330, 330, 330))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
                         .addGap(67, 67, 67)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jComboBox13, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBox12, 0, 154, Short.MAX_VALUE))
                         .addGap(60, 60, 60)
                         .addComponent(jLabel29)
-                        .addContainerGap(440, Short.MAX_VALUE))))
+                        .addContainerGap(440, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel31)
+                        .addGap(44, 44, 44)
+                        .addComponent(jButton18)
+                        .addGap(206, 206, 206))))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(112, 112, 112)
                 .addComponent(jLabel25)
@@ -774,7 +789,7 @@ public class ExaminationUI extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jComboBox15, 0, 127, Short.MAX_VALUE)
                     .addComponent(jComboBox14, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -802,11 +817,13 @@ public class ExaminationUI extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
                     .addComponent(jComboBox13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
+                .addGap(57, 57, 57)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
-                    .addComponent(jLabel31))
-                .addContainerGap(498, Short.MAX_VALUE))
+                    .addComponent(jLabel31)
+                    .addComponent(jButton17)
+                    .addComponent(jButton18))
+                .addContainerGap(512, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Generate Graphs", jPanel7);
@@ -1036,7 +1053,7 @@ public class ExaminationUI extends javax.swing.JFrame {
     //test hashmaps,
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // generate SGPA button
-        System.out.println("start");
+       
         String faculty = jComboBox6.getSelectedItem().toString();
         String department = jComboBox7.getSelectedItem().toString();
         String batch = jComboBox9.getSelectedItem().toString();
@@ -1105,31 +1122,40 @@ public class ExaminationUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    //test
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // Generate semester ranks button
+        String department = jComboBox7.getSelectedItem().toString();
+        String batch = jComboBox9.getSelectedItem().toString();
+        int semester = jComboBox10.getSelectedIndex()+1;
         
-//        $results = $this->getDoctrine()->getRepository('AppBundle:Semester_results')->findBy(array('semId' => $id), array('gPA' => 'DESC') );
-//        $rank = 1;
-//        $lastGpa = 5.0000;
-//
-//        //to catch equal ranks
-//        $lastRank = 0;
-//        // set ranks 
-//        foreach ($results as $result) {
-//            if ($result->getGpa() == $lastGpa) {
-//                $result->setRank($lastRank);
-//            }else{
-//                $result->setRank($rank);
-//                $lastRank = $rank;
-//            }
-//            $rank++;
-//            $lastGpa = $result->getGpa();
-//
-//            $em->persist($result);
-//            $em->flush();
-//        }
+        SemesterResult[] semesterResults = DBHandler.getSemesterResultsOrdered(department, Integer.valueOf(batch), semester);
+        
+        int rank = 1;
+        double lastGpa = 5.0000;
+        
+        //to catch equal ranks
+        int lastRank = 0;
 
+        // set ranks 
+        for(SemesterResult semesterResult : semesterResults){
+            if(semesterResult.getsGPA() == lastGpa){
+                semesterResult.setsRank(lastRank);
+            }else{
+                semesterResult.setsRank(rank);
+                lastRank = rank;
+            }
+            rank++;
+            lastGpa = semesterResult.getsGPA();
+            
+            //persist
+            dBHandler.setSemesterResults(semesterResult);
+        }
     }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton17ActionPerformed
 
     //--------------------------------User methods-------------------------------------
     
@@ -1218,6 +1244,8 @@ public class ExaminationUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
